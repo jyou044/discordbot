@@ -1,12 +1,14 @@
 '''
 Code written by Jason You.
 This is a simple python discord bot I made to send 
-commands within my discord server.
+commands within a discord server.
+V1.0.0
 '''
 
 # Imports
 import os
 import discord
+import random
 from discord.ext import commands
 from dotenv import load_dotenv
 
@@ -35,11 +37,17 @@ async def hello(ctx):
 async def yogi(ctx):
     await ctx.send("I love donuts!")
 
-    
 @client.command()
 async def oops(ctx):
     await ctx.send("D'OH!")
-    
+
+@client.command()
+async def photo(ctx):
+    await ctx.send(file=discord.File(random.choice(['images/Homer_Simpson.png', 'images/spongebob.jpeg'])))
+
+@client.command()
+async def meme(ctx):
+    await ctx.send(random.choice(['https://imgur.com/t/homer/dPNFUBP', 'https://imgur.com/t/homer/cFqbFq1', 'https://imgur.com/HbrKEnf']))
 
 
 client.run(ACCESS_TOKEN)
