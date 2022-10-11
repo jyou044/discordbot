@@ -2,12 +2,11 @@
 Simple discord bot created through use of Python
 ## Overview
 ### Commands
-- **$hello**: Sends "Bonjour"
-- **$yogi**: Sends "I love donuts!"
-- **$oops**: Sends "D'OH!"
-- **$photo**: Sends randomized photo
+- **$yogiHelp**: Sends a list of commands users can use to interact with the bot.
+- **$yogi**: Sends one of "Bonjour!", "I love donuts!", or "D'OH!"
+- **$photo**: Sends randomized photo with user inputted caption
 - **$meme**: Sends randomized GIF
 # Current Version
 - Simple Text Commands
-- Added Randomized Picture & GIF Commands
+- Added Randomized Picture with caption & GIF Commands
 ## More changes coming soon!
