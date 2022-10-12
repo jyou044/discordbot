@@ -6,6 +6,7 @@ Simple discord bot created through use of Python
 - **$yogi**: Sends one of "Bonjour!", "I love donuts!", or "D'OH!"
 - **$photo**: Sends randomized photo with user inputted caption
 - **$meme**: Sends randomized GIF
+- When you ping the bot, it will respond with a list of commands users can use, similar to the yogiHelp command
 # Current Version
 - Simple Text Commands
 - Added Randomized Picture with caption & GIF Commands

@@ -22,6 +22,7 @@ intents.message_content = True
 load_dotenv()
 # Get environment variable for the access token
 ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
+BOT_ID = os.getenv('BOT_ID')
 
 # Initialize client (bot command is "$")
 client = commands.Bot(command_prefix="$", intents=intents)
@@ -34,13 +35,7 @@ async def on_ready():
 # Command that informs the user of the commands they can use
 @client.command()
 async def yogiHelp(ctx):
-    embeded = discord.Embed(
-        title="YogiBot Commands",
-        description= "Below are a list of yogibot commands. They must start with $"
-    )
-    embeded.add_field(name="yogi", value="This command sends a randomized text response.")
-    embeded.add_field(name="photo", value="This command will prompt the user for a custom caption for a randomly chosen photo.")
-    embeded.add_field(name="meme", value="This command sends a randomized GIF meme.")
+    embeded = embed_help()
     await ctx.send(embed=embeded)
 
 # Command to send randomized catch phrase Homer says
@@ -76,6 +71,22 @@ async def photo(ctx):
         print("Error", e)
         await ctx.send("Sorry, I didn't get your message in time! Maybe you forgot to press enter?")
 
+# Command to send a randomly selected GIF meme
+@client.command()
+async def meme(ctx):
+    await ctx.send(random.choice(['https://imgur.com/t/homer/dPNFUBP', 'https://imgur.com/t/homer/cFqbFq1', 'https://imgur.com/HbrKEnf',
+    'https://giphy.com/gifs/dance-spongebob-bob-nDSlfqf0gn5g4', 'https://giphy.com/gifs/spongebob-squarepants-cehalopod-lodge-5vee7PEK0reww']))
+
+
+# Command when bot is pinged by the user
+@client.event
+async def on_message(ctx):
+    if str(ctx.content) == BOT_ID:
+        await ctx.channel.send('Greetings! Yogibot at your service!')
+        await ctx.channel.send(embed=embed_help())
+    await client.process_commands(ctx)
+
+
 def image_modifier(chosen_file, msg):
     base = Image.open(chosen_file).convert("RGBA")
     updated_image = Image.new("RGBA", base.size, (255, 255, 255, 0))
@@ -84,13 +95,15 @@ def image_modifier(chosen_file, msg):
     draw.text((10,300), msg,font=fnt, fill=(255,255,255,255))
     out = Image.alpha_composite(base, updated_image)
     out.save("final.png")
+
+def embed_help():
+    embeded = discord.Embed(
+        title="YogiBot Commands",
+        description= "Below are a list of yogibot commands. They must start with $"
+    )
+    embeded.add_field(name="yogi", value="This command sends a randomized text response.")
+    embeded.add_field(name="photo", value="This command will prompt the user for a custom caption for a randomly chosen photo.")
+    embeded.add_field(name="meme", value="This command sends a randomized GIF meme.")
+    return embeded
    
-
-# Command to send a randomly selected GIF meme
-@client.command()
-async def meme(ctx):
-    await ctx.send(random.choice(['https://imgur.com/t/homer/dPNFUBP', 'https://imgur.com/t/homer/cFqbFq1', 'https://imgur.com/HbrKEnf',
-    'https://giphy.com/gifs/dance-spongebob-bob-nDSlfqf0gn5g4', 'https://giphy.com/gifs/spongebob-squarepants-cehalopod-lodge-5vee7PEK0reww']))
-
-
 client.run(ACCESS_TOKEN)
