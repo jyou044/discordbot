@@ -43,6 +43,26 @@ async def yogiHelp(ctx):
 async def yogi(ctx):
     await ctx.send(random.choice(["I love donuts!", "Bonjour", "D'OH!"]))
 
+
+# Command to have user guess a number the yogibot is thinking of
+@client.command()
+async def guess(ctx):
+    yogiMessage = "I'm thinking of a number between 1 and 20, can you guess?"
+    chosenNumber = random.randint(1,20)
+    await ctx.send(yogiMessage)
+    try:
+        msg = await client.wait_for("message",
+        check=lambda msg: msg.author == ctx.author and msg.channel == ctx.channel, timeout=30)
+        print("User msg received: ", msg.content)
+        if int(msg.content) == chosenNumber:
+            await ctx.send("Correct! That is the number I guessed")
+        else:
+            chosen_num_msg = "Sorry! The number I chose was " + str(chosenNumber) + " better luck next time!"
+            await ctx.send(chosen_num_msg)
+    except Exception as e:
+        print("Error random number:", e)
+        await ctx.send("I didn't get your guess in time!")
+
 # Command to send picture with user inputted caption
 @client.command()
 async def photo(ctx):
@@ -90,7 +110,7 @@ async def on_message(ctx):
 def image_modifier(chosen_file, msg):
     base = Image.open(chosen_file).convert("RGBA")
     updated_image = Image.new("RGBA", base.size, (255, 255, 255, 0))
-    fnt = ImageFont.truetype("impact.ttf", 40)
+    fnt = ImageFont.truetype("impact.ttf", 30)
     draw = ImageDraw.Draw(updated_image)
     draw.text((10,300), msg,font=fnt, fill=(255,255,255,255))
     out = Image.alpha_composite(base, updated_image)
@@ -104,6 +124,7 @@ def embed_help():
     embeded.add_field(name="yogi", value="This command sends a randomized text response.")
     embeded.add_field(name="photo", value="This command will prompt the user for a custom caption for a randomly chosen photo.")
     embeded.add_field(name="meme", value="This command sends a randomized GIF meme.")
+    embeded.add_field(name="guess", value="Pick a number, any number between 1-20!")
     return embeded
    
 client.run(ACCESS_TOKEN)
