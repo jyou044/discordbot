@@ -2,7 +2,7 @@
 Code written by Jason You.
 This is a simple python discord bot I made to have interactions with the yogibot
 The photo-caption generation was inspired by https://docs.replit.com/tutorials/discord-meme-maker-bot
-commands within a discord server.
+
 V1.0.0
 '''
 

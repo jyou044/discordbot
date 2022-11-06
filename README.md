@@ -1,6 +1,8 @@
 # discordbot
 Simple discord bot created through use of Python
+
 ## Overview
+- The code for the photo-caption generation command was inspired by https://docs.replit.com/tutorials/discord-meme-maker-bot
 ### Commands
 - **$yogiHelp**: Sends a list of commands users can use to interact with the bot.
 - **$yogi**: Sends one of "Bonjour!", "I love donuts!", or "D'OH!".
