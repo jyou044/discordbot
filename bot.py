@@ -47,21 +47,33 @@ async def yogi(ctx):
 # Command to have user guess a number the yogibot is thinking of
 @client.command()
 async def guess(ctx):
-    yogiMessage = "I'm thinking of a number between 1 and 20, can you guess?"
+    count = 0
+    flag = 0
+    yogiMessage = "I'm thinking of a number between 1 and 20, can you guess the number in five tries?"
     chosenNumber = random.randint(1,20)
     await ctx.send(yogiMessage)
     try:
-        msg = await client.wait_for("message",
-        check=lambda msg: msg.author == ctx.author and msg.channel == ctx.channel, timeout=30)
-        print("User msg received: ", msg.content)
-        if int(msg.content) == chosenNumber:
-            await ctx.send("Correct! That is the number I guessed")
-        else:
-            chosen_num_msg = "Sorry! The number I chose was " + str(chosenNumber) + " better luck next time!"
-            await ctx.send(chosen_num_msg)
+        while count < 5:
+            try:
+                print("Count: ", count)
+                msg = await client.wait_for("message",
+                check=lambda msg: msg.author == ctx.author and msg.channel == ctx.channel)
+                print("User msg received: ", msg.content)
+                if int(msg.content) == chosenNumber:
+                    flag = 1
+                    await ctx.send("Correct! That is the number I guessed")
+                    break
+                else:
+                    count+=1
+                    if count < 5:
+                        await ctx.send("Sorry that wasn't the number I had in mind!")
+            except Exception as e1:
+                print("Error: ", e1)
+                await ctx.send("Please enter a valid number!")
     except Exception as e:
         print("Error random number:", e)
-        await ctx.send("I didn't get your guess in time!")
+    if flag == 0:
+        await ctx.send("Sorry! The number I chose was "+ str(chosenNumber) + " better luck next time!")
 
 # Command to send picture with user inputted caption
 @client.command()
