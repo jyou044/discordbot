@@ -1,5 +1,5 @@
 # discordbot
-Simple discord bot created through use of Python
+This is a discord bot I created through use of Python. It's a fun, interactive bot that is capable of sending GIFs to captioned images
 
 ## Overview
 - The code for the photo-caption generation command was inspired by https://docs.replit.com/tutorials/discord-meme-maker-bot
