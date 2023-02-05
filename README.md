@@ -21,12 +21,12 @@ Simple discord bot created through use of Python
 
 #### Photo command
 
-<img src="/assets/photocommand1.JPG" alt="Home" height="650" width="750" >
-<img src="/assets/photocommand2.JPG" alt="Home" height="650" width="750" >
+<img src="/assets/photocommand1.JPG" alt="Home" height="650" width="700" >
+<img src="/assets/photocommand2.JPG" alt="Home" height="650" width="700" >
 
 #### Guess Command
 
-<img src="/assets/guesscommand.JPG" alt="Home" height="650" width="650" >
+<img src="/assets/guesscommand.JPG" alt="Home" height="650" width="700" >
 
 # Current Version
 
